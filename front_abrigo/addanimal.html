@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CRUD AbrigoAnimais</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+</head>
+<body class="w-screen h-screen gap-2 flex flex-col justify-center items-center">
+<main class="p-2 gap-4 bg-zinc-200 border-zinc-300 rounded shadow flex flex-col items-center">
+  <h1 class="text-xl font-semibold">Adicionar Animal</h1>
+  <form
+          id="formadd"
+          class="flex flex-col gap-4"
+          method="POST"
+  >
+    <label class="gap-1 flex justify-between">
+      <input class="p-1 rounded" placeholder="Nome" type="text" name="nome" id="nome">
+    </label>
+    <label class="gap-1 flex justify-between">
+      <input class="p-1 rounded" placeholder="Idade" type="number" name="idade" id="idade">
+    </label>
+    <label class="gap-1 flex justify-between">
+      <input class="p-1 rounded" placeholder="especie" type="text" name="especie" id="especie">
+    </label>
+    <label class="gap-1 flex justify-between">
+      <input class="p-1 rounded" placeholder="Raca" type="text" name="raca" id="raca">
+    </label>
+    <label class="gap-1 flex justify-between">
+      <input class="p-1 rounded" placeholder="Sexo" type="text" name="sexo" id="sexo">
+    </label>
+    <label class="gap-1 flex justify-between">
+      <input class="p-1 rounded" placeholder="Coloração" type="text" name="coloracao" id="coloracao">
+    </label>
+    <label class="gap-1 flex justify-between">
+      <input class="p-1 rounded" placeholder="Saude" type="text" name="saude" id="saude">
+    </label>
+    <label class="gap-1 flex justify-between">
+      <input class="p-1 rounded" placeholder="Data de Entrada" type="date" name="data_entrada" id="data_entrada">
+    </label>
+    <label class="gap-1 flex justify-between">
+      <input class="p-1 rounded" placeholder="Peso" type="number" name="peso" id="peso">
+    </label>
+    <button
+            type="submit"
+            class="bg-emerald-700 hover:bg-emerald-800 transition px-4 py-2 rounded text-white"
+            id="btn-add"
+    >Cadastrar</button>
+  </form>
+</main>
+<a href="/front_abrigo/listallanimals.html">Listar todos</a>
+<script type="text/javascript" src="scripts/script_addanimal.js" defer></script>
+<script>
+  feather.replace();
+</script>
+</body>
+</html>

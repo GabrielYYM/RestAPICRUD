@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0,
+                                            maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CRUD AbrigoAnimais</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+</head>
+<a href="/front_abrigo/addanimal.html">Adicionar animais</a>
+<body class="w-screen h-screen gap-2 flex flex-col justify-center items-center">
+<main class="p-2 gap-4 bg-zinc-200 border-zinc-300 rounded shadow flex flex-col items-center">
+  <!--  script n funciona
+  <input type="number"
+         id="searchId"
+         placeholder="Digite o ID do animal"
+         class="px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+         min="1">
+  <button onclick="findById()">
+    Buscar por ID
+  </button>
+-->
+  <div id="loading">
+    <span>Buscando Data</span>
+  </div>
+  <h1>Listar todos os Animais</h1>
+  <table>
+    <thead>
+    <th class="p-2 border-2 border-black">ID</th>
+    <th class="p-2 border-2 border-black">Nome</th>
+    <th class="p-2 border-2 border-black">Idade</th>
+    <th class="p-2 border-2 border-black">Especie</th>
+    <th class="p-2 border-2 border-black">Raca</th>
+    <th class="p-2 border-2 border-black">Sexo</th>
+    <th class="p-2 border-2 border-black">Coloracao</th>
+    <th class="p-2 border-2 border-black">Saude</th>
+    <th class="p-2 border-2 border-black">Data Entrada</th>
+    <th class="p-2 border-2 border-black">Peso</th>
+    <th class="p-2 border-2 border-black">Editar</th>
+    <th class="p-2 border-2 border-black">Remover</th>
+    </thead>
+    <tbody id="animals"></tbody>
+  </table>
+  <!-- modal -->
+  <!-- arrumar o update -->
+  <div id="formModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center">
+    <div class="bg-white p-6 rounded-lg w-full max-w-2xl">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-bold">Editar Animal</h2>
+        <button onclick="document.getElementById('formModal').style.display='none'" class="text-gray-500 hover:text-gray-700">
+          <i data-feather="x"></i>
+        </button>
+      </div>
+
+      <form id="editForm" class="space-y-4">
+        <input type="hidden" id="id" name="id">
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label for="nome" class="block text-sm font-medium text-gray-700">Nome</label>
+            <input type="text" id="nome" name="nome" required
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+          </div>
+
+          <div>
+            <label for="idade" class="block text-sm font-medium text-gray-700">Idade</label>
+            <input type="number" id="idade" name="idade" required
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+          </div>
+
+          <div>
+            <label for="especie" class="block text-sm font-medium text-gray-700">Espécie</label>
+            <input type="text" id="especie" name="especie" required
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+          </div>
+
+          <div>
+            <label for="raca" class="block text-sm font-medium text-gray-700">Raça</label>
+            <input type="text" id="raca" name="raca" required
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+          </div>
+
+          <div>
+            <label for="sexo" class="block text-sm font-medium text-gray-700">Sexo</label>
+            <input type="text" id="sexo" name="sexo" required
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+            </input>
+          </div>
+
+          <div>
+            <label for="coloracao" class="block text-sm font-medium text-gray-700">Coloração</label>
+            <input type="text" id="coloracao" name="coloracao" required
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+          </div>
+
+          <div>
+            <label for="saude" class="block text-sm font-medium text-gray-700">Saúde</label>
+            <input type="text" id="saude" name="saude" required
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+            </input>
+          </div>
+
+          <div>
+            <label for="data_entrada" class="block text-sm font-medium text-gray-700">Data de entrada</label>
+            <input type="date" id="data_entrada" name="data_entrada" step="0.1" required
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+          </div>
+
+          <div>
+            <label for="peso" class="block text-sm font-medium text-gray-700">Peso (kg)</label>
+            <input type="number" id="peso" name="peso" step="0.1" required
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+          </div>
+        </div>
+
+        <div class="flex justify-end space-x-3 mt-6">
+          <button type="button"
+                  onclick="document.getElementById('formModal').style.display='none'"
+                  class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">
+            Cancelar
+          </button>
+          <button type="submit"
+                  class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+            Salvar Alterações
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+<script type="module" src="scripts/script_listallanimals.js" defer></script>
+</body>
+</html>
